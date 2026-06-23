@@ -1,6 +1,7 @@
 import { createOpenAI } from '@ai-sdk/openai'
 import { createMistral } from '@ai-sdk/mistral'
 import { generateText } from 'ai'
+import 'dotenv/config'
 import './heal'
 
 require('ts-node/register')
@@ -119,7 +120,10 @@ exports.config = {
 	output: './output',
 	helpers: {
 		Playwright: {
-			url: 'http://zero.webappsecurity.com/login.html',
+			url:
+				process.env.DAX_BASE_URL ||
+				process.env.CODECEPT_BASE_URL ||
+				'http://zero.webappsecurity.com/login.html',
 			// Ejemplo de emular un dispositvo pero por defecto en todas las pruebas si quiere solo probarse solo en una prueba vease el test de emulacionDeDispositivos
 			// emulate: tabletDescriptor,
 			show: false,
@@ -158,6 +162,14 @@ exports.config = {
 	include: {
 		I: './steps_file.ts',
 		loginPage: './pages/loginPage',
+		daxAuthPage: './pages/daxAuthPage',
+		daxBillingPage: './pages/daxBillingPage',
+		daxCartPage: './pages/daxCartPage',
+		daxCatalogPage: './pages/daxCatalogPage',
+		daxHomePage: './pages/daxHomePage',
+		daxProductPage: './pages/daxProductPage',
+		daxSearchPage: './pages/daxSearchPage',
+		daxStoreLocatorPage: './pages/daxStoreLocatorPage',
 	},
 	mocha: {},
 	bootstrap: null,
@@ -165,7 +177,10 @@ exports.config = {
 	hooks: [],
 	gherkin: {
 		features: './features/*.feature',
-		steps: ['./step_definitions/RegistroSteps'],
+		steps: [
+			'./step_definitions/RegistroSteps',
+			'./step_definitions/DaxPublicSteps',
+		],
 	},
 	plugins: {
 		subtitles: {

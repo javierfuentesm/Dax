@@ -35,21 +35,33 @@ type steps_file = () => {
 	readPdf: (pdfUrl: string) => Promise<string>
 }
 type loginPage = typeof import('./pages/loginPage')
+type daxAuthPage = typeof import('./pages/daxAuthPage')
+type daxBillingPage = typeof import('./pages/daxBillingPage')
+type daxCartPage = typeof import('./pages/daxCartPage')
+type daxCatalogPage = typeof import('./pages/daxCatalogPage')
+type daxHomePage = typeof import('./pages/daxHomePage')
+type daxProductPage = typeof import('./pages/daxProductPage')
+type daxSearchPage = typeof import('./pages/daxSearchPage')
+type daxStoreLocatorPage = typeof import('./pages/daxStoreLocatorPage')
 type PlaywrightVideoAllure =
 	typeof import('./utils/playwrightVideoAllure_helper')
 type DbHelper = import('./node_modules/codeceptjs-dbhelper')
-type ResembleHelper = import('codeceptjs-resemblehelper')
 type ChaiWrapper = import('codeceptjs-chai')
-// aca se asocian los perfiles de la plataforma
-type profileType = 'Banca Patrimonial' | 'Banca Privada' | 'Wealth Management'
 
 declare namespace CodeceptJS {
 	interface SupportObject {
 		I: I
 		current: any
-		// aca se le pasan como parametros los perfiles de la plataforma
 		login: (profile: profileType) => Promise<void>
 		loginPage: loginPage
+		daxAuthPage: daxAuthPage
+		daxBillingPage: daxBillingPage
+		daxCartPage: daxCartPage
+		daxCatalogPage: daxCatalogPage
+		daxHomePage: daxHomePage
+		daxProductPage: daxProductPage
+		daxSearchPage: daxSearchPage
+		daxStoreLocatorPage: daxStoreLocatorPage
 	}
 	interface Methods
 		extends Playwright,
@@ -57,7 +69,6 @@ declare namespace CodeceptJS {
 			REST,
 			GraphQL,
 			DbHelper,
-			ResembleHelper,
 			ChaiWrapper {}
 	interface I extends ReturnType<steps_file>, WithTranslation<Methods> {}
 	namespace Translation {
