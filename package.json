@@ -5,6 +5,9 @@
 	"scripts": {
 		"test": "npx codeceptjs run --tests --verbose",
 		"test:gherkin": "npx codeceptjs run --features --grep @probando --verbose --debug",
+		"test:dax:smoke": "cross-env DAX_BASE_URL=https://www.dax.com.mx npx codeceptjs run --features --grep @smoke --verbose",
+		"test:dax:regression": "cross-env DAX_BASE_URL=https://www.dax.com.mx npx codeceptjs run --features --grep @regression --verbose",
+		"test:dax:candidates": "cross-env DAX_BASE_URL=https://www.dax.com.mx npx codeceptjs run --features --grep @candidate --verbose",
 		"test:gherkin2": "npx codeceptjs run-workers 10 --features",
 		"test:workers": "npx ts-node runWorkers.ts",
 		"test:ai": "npx codeceptjs run --features --grep @probando --ai",
